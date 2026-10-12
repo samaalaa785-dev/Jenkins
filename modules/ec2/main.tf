@@ -105,6 +105,12 @@ resource "aws_instance" "private_a" {
   vpc_security_group_ids      = [aws_security_group.private_app.id]
   associate_public_ip_address = false
 
+  lifecycle {
+
+    ignore_changes = [vpc_security_group_ids]
+
+  }
+
   tags = {
     Name = "${var.environment}-private-ec2-a"
   }
@@ -116,6 +122,12 @@ resource "aws_instance" "private_b" {
   subnet_id                   = var.private_subnet_ids[1]
   vpc_security_group_ids      = [aws_security_group.private_app.id]
   associate_public_ip_address = false
+
+  lifecycle {
+
+    ignore_changes = [vpc_security_group_ids]
+
+  }
 
   tags = {
     Name = "${var.environment}-private-ec2-b"
