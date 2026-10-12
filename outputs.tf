@@ -21,11 +21,3 @@ output "public_instance_ids" {
 output "private_instance_ids" {
   value = module.ec2.private_instance_ids
 }
-
-output "public_alb_dns" {
-  value = module.lb.public_alb_dns
-}
-
-output "internal_alb_dns" {
-  value = module.lb.internal_alb_dns
-}
