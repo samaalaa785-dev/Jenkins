@@ -1,30 +1,21 @@
-resource "aws_security_group" "app" {
-  name        = "${var.environment}-app-sg"
-  description = "Security group for the simulated EC2 instance"
-  vpc_id      = aws_vpc.main.id
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name        = "${var.environment}-app-sg"
-    Environment = var.environment
-  }
+module "ec2" {
+  source             = "./modules/ec2"
+  environment        = var.environment
+  ami_id             = "ami-amazonlinux2023"
+  vpc_id             = module.network.vpc_id
+  vpc_cidr           = module.network.vpc_cidr
+  public_subnet_ids  = module.network.public_subnet_ids
+  private_subnet_ids = module.network.private_subnet_ids
 }
 
-resource "aws_instance" "app" {
-  ami                         = "ami-amazonlinux2023"
-  instance_type               = "t2.micro"
-  subnet_id                   = aws_subnet.main.id
-  vpc_security_group_ids      = [aws_security_group.app.id]
-  associate_public_ip_address = false
-
-  tags = {
-    Name        = "${var.environment}-app-ec2"
-    Environment = var.environment
-  }
+module "lb" {
+  source               = "./modules/lb"
+  environment          = var.environment
+  vpc_id               = module.network.vpc_id
+  public_subnet_ids    = module.network.public_subnet_ids
+  private_subnet_ids   = module.network.private_subnet_ids
+  public_instance_ids  = module.ec2.public_instance_ids
+  private_instance_ids = module.ec2.private_instance_ids
+  public_alb_sg_id     = module.ec2.public_alb_sg_id
+  internal_alb_sg_id   = module.ec2.internal_alb_sg_id
 }

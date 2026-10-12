@@ -15,8 +15,9 @@ variable "vpc_cidr" {
 }
 
 variable "subnet_cidr" {
-  description = "Subnet CIDR block"
+  description = "Legacy subnet CIDR retained for existing tfvars"
   type        = string
+  default     = "10.0.1.0/24"
 }
 
 variable "bucket_name" {

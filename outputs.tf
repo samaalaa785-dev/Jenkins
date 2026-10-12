@@ -1,16 +1,31 @@
 output "vpc_id" {
-  value = aws_vpc.main.id
+  value = module.network.vpc_id
 }
 
-output "subnet_id" {
-  value = aws_subnet.main.id
+output "public_subnet_ids" {
+  value = module.network.public_subnet_ids
+}
+
+output "private_subnet_ids" {
+  value = module.network.private_subnet_ids
 }
 
 output "bucket_name" {
   value = aws_s3_bucket.main.bucket
 }
 
-output "ec2_instance_id" {
-  description = "ID of the simulated EC2 instance"
-  value       = aws_instance.app.id
+output "public_instance_ids" {
+  value = module.ec2.public_instance_ids
+}
+
+output "private_instance_ids" {
+  value = module.ec2.private_instance_ids
+}
+
+output "public_alb_dns" {
+  value = module.lb.public_alb_dns
+}
+
+output "internal_alb_dns" {
+  value = module.lb.internal_alb_dns
 }
