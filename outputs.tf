@@ -9,3 +9,8 @@ output "subnet_id" {
 output "bucket_name" {
   value = aws_s3_bucket.main.bucket
 }
+
+output "ec2_instance_id" {
+  description = "ID of the simulated EC2 instance"
+  value       = aws_instance.app.id
+}
