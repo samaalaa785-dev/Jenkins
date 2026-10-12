@@ -1,3 +1,3 @@
-#new-pipeline
+new-pipeline
 --------
 new-pipeline
