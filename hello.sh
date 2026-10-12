@@ -1,0 +1,1 @@
+ech "print from script"
