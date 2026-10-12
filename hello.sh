@@ -1,1 +1,1 @@
-echo "print from script"
+ech "print from script"
