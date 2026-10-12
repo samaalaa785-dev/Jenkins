@@ -1,0 +1,5 @@
+aws_region  = "us-east-1"
+environment = "stg"
+vpc_cidr    = "10.20.0.0/16"
+subnet_cidr = "10.20.1.0/24"
+bucket_name = "sama-stg-app-bucket-2026"

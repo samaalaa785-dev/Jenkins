@@ -1,0 +1,5 @@
+aws_region  = "us-east-1"
+environment = "prod"
+vpc_cidr    = "10.30.0.0/16"
+subnet_cidr = "10.30.1.0/24"
+bucket_name = "sama-prod-app-bucket-2026"
