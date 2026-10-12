@@ -2,20 +2,37 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello1') {
+        stage('Hello World') {
             steps {
-                echo 'Hello World2'
+                echo 'Hello World'
             }
         }
-        stage('Hello2') {
+
+        stage('Run Script') {
             steps {
-                echo 'Hello World3'
+                sh '''
+                    chmod +x hello.sh
+                    ./hello.sh
+                '''
             }
         }
-        stage('Hello3') {
-            steps {
-                echo 'Hello World4'
-            }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finished (success, failure, or aborted).'
+        }
+
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+
+        failure {
+            echo 'Pipeline failed!'
+        }
+
+        aborted {
+            echo 'Pipeline was aborted!'
         }
     }
 }
